@@ -1,6 +1,7 @@
 from enum import Enum
 from converters.type_conversions import (convert_adj_list_to_adj_matrix, convert_adj_matrix_to_adj_list,
                                          convert_adj_list_to_inc_matrix, convert_inc_matrix_to_adj_list)
+from visualization.circle_representation import CircleRepresentation
 
 
 class GraphRepresentationType(Enum):
@@ -14,52 +15,70 @@ class GraphRepresentation:
     def __init__(self, repr_type: GraphRepresentationType, math_repr):
         self.repr_type = repr_type
         self.math_repr = math_repr
+        self.graphic_repr = CircleRepresentation()
 
     def __len__(self) -> int:
         return len(self.math_repr)
 
+    def display(self) -> None:
+        if self.repr_type != GraphRepresentationType.ADJACENCY_LIST:
+            raise NotImplementedError("Displaying only provided for ADJACENCY LIST")
+        self.graphic_repr.display(self.math_repr)
+
     def convert(self, destination_type: GraphRepresentationType) -> bool:
         if destination_type == GraphRepresentationType.ADJACENCY_MATRIX:
-            if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
-                return False
-            else:
-                if self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
-                    self.math_repr = convert_adj_list_to_adj_matrix(self.math_repr)
-                elif self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
-                    self.math_repr = convert_adj_list_to_adj_matrix(convert_inc_matrix_to_adj_list(self.math_repr))
-                else:
-                    raise ValueError("Conversion to this type is not supported")
-
-                self.repr_type = GraphRepresentationType.ADJACENCY_MATRIX
-                return True
+            return self._convert_to_adjacency_matrix()
 
         elif destination_type == GraphRepresentationType.ADJACENCY_LIST:
-            if self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
-                return False
-            else:
-                if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
-                    self.math_repr = convert_adj_matrix_to_adj_list(self.math_repr)
-                elif self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
-                    self.math_repr = convert_inc_matrix_to_adj_list(self.math_repr)
-                else:
-                    raise ValueError("Conversion to this type is not supported")
-
-                self.repr_type = GraphRepresentationType.ADJACENCY_LIST
-                return True
+            return self._convert_to_adjacency_list()
 
         elif destination_type == GraphRepresentationType.INCIDENCE_MATRIX:
-            if self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
-                return False
-            else:
-                if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
-                    self.math_repr = convert_adj_list_to_inc_matrix(convert_adj_matrix_to_adj_list(self.math_repr))
-                elif self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
-                    self.math_repr = convert_adj_list_to_inc_matrix(self.math_repr)
-                else:
-                    raise ValueError("Conversion to this type is not supported")
+            return self._convert_to_incidence_matrix()
 
-                self.repr_type = GraphRepresentationType.INCIDENCE_MATRIX
-                return True
+        else:
+            return False
+
+    def _convert_to_adjacency_matrix(self) -> bool:
+        if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
+            return False
+        else:
+            if self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
+                self.math_repr = convert_adj_list_to_adj_matrix(self.math_repr)
+            elif self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
+                self.math_repr = convert_adj_list_to_adj_matrix(convert_inc_matrix_to_adj_list(self.math_repr))
+            else:
+                raise ValueError("Conversion to this type is not supported")
+
+            self.repr_type = GraphRepresentationType.ADJACENCY_MATRIX
+            return True
+
+    def _convert_to_adjacency_list(self) -> bool:
+        if self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
+            return False
+        else:
+            if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
+                self.math_repr = convert_adj_matrix_to_adj_list(self.math_repr)
+            elif self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
+                self.math_repr = convert_inc_matrix_to_adj_list(self.math_repr)
+            else:
+                raise ValueError("Conversion to this type is not supported")
+
+            self.repr_type = GraphRepresentationType.ADJACENCY_LIST
+            return True
+
+    def _convert_to_incidence_matrix(self) -> bool:
+        if self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
+            return False
+        else:
+            if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
+                self.math_repr = convert_adj_list_to_inc_matrix(convert_adj_matrix_to_adj_list(self.math_repr))
+            elif self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
+                self.math_repr = convert_adj_list_to_inc_matrix(self.math_repr)
+            else:
+                raise ValueError("Conversion to this type is not supported")
+
+            self.repr_type = GraphRepresentationType.INCIDENCE_MATRIX
+            return True
 
 
 
