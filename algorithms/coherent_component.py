@@ -1,17 +1,4 @@
-from enum import Enum
-
-
-class GraphRepresentationType(Enum):
-    ADJACENCY_MATRIX = 1
-
-
-class GraphRepresentation:
-    def __init__(self, repr_type: GraphRepresentationType, math_repr: list):
-        self.repr_type = repr_type
-        self.math_repr = math_repr
-
-    def __len__(self) -> int:
-        return len(self.math_repr)
+from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
 
 class CoherentComponentFinder:
@@ -30,17 +17,17 @@ class CoherentComponentFinder:
                 if self.components[node] == -1:
                     component_index += 1
                     self.components[node] = component_index
-                    self.find_recursively(graph, component_index, node)
+                    self._find_recursively(graph, component_index, node)
 
             return self.components
 
-    def find_recursively(self, graph: GraphRepresentation, component_index: int, node: int) -> None:
+    def _find_recursively(self, graph: GraphRepresentation, component_index: int, node: int) -> None:
         for other_node in range(len(graph)):
             # if two nodes are neighbors
             if graph.math_repr[other_node][node] != 0:
                 if self.components[other_node] == -1:
                     self.components[other_node] = component_index
-                    self.find_recursively(graph, component_index, other_node)
+                    self._find_recursively(graph, component_index, other_node)
 
 
 

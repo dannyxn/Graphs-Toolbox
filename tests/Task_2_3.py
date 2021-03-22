@@ -1,4 +1,4 @@
-from coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
+from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
 
 
 if __name__ == "__main__":
