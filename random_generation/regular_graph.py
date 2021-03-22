@@ -3,7 +3,7 @@ from random import randint
 from collections import defaultdict
 
 
-def degree_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
+def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     reset = True
     graph = None
     while reset:
