@@ -3,22 +3,22 @@ from random import randint
 from collections import defaultdict
 
 
-def k_regular_graph(n, k):
+def degree_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     reset = True
     graph = None
     while reset:
-        graph = defaultdict(list, {k: [] for k in range(n)})
-        for _ in range(int((n * k) / 2)):
-            vertex1 = randint(0, n - 1)
-            vertex2 = randint(0, n - 1)
-            while vertex1 == vertex2:
-                vertex1 = randint(0, n - 1)
-                vertex2 = randint(0, n - 1)
-            graph[vertex1].append(vertex2)
-            graph[vertex2].append(vertex1)
+        graph = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
+        for _ in range(int((number_of_nodes * degree) / 2)):
+            node1 = randint(0, number_of_nodes - 1)
+            node2 = randint(0, number_of_nodes - 1)
+            while node1 == node2:
+                node1 = randint(0, number_of_nodes - 1)
+                node2 = randint(0, number_of_nodes - 1)
+            graph[node1].append(node2)
+            graph[node2].append(node1)
         reset = False
-        for vertex, neighbours in graph.items():
-            if vertex in neighbours or len(neighbours) != k:
+        for node, neighbours in graph.items():
+            if node in neighbours or len(neighbours) != degree:
                 reset = True
             for x in neighbours:
                 if neighbours.count(x) != 1:
