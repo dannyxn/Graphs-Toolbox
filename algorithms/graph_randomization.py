@@ -3,6 +3,7 @@ from random import randint
 from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
 
+
 def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) -> GraphRepresentation:
     graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
     adjacency_matrix = graph.math_repr
