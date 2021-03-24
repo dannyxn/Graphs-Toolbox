@@ -57,3 +57,33 @@ def convert_inc_matrix_to_adj_list(incidence_matrix):
                         adjacency_list[row2].append(row)
 
     return OrderedDict(sorted(adjacency_list.items()))
+
+def convert_graph_seq_to_adj_matrix(graph_sequence):
+    seq_len = len(graph_sequence)
+    adj_matrix = [[0 for j in range(seq_len)] for i in range(seq_len)]
+    for i in range(seq_len - 1):
+        for j in range(graph_sequence[i]):
+            for row in range(i + 1, seq_len):
+                if graph_sequence[i] < 1 or graph_sequence[row] < 1:
+                    continue
+                if adj_matrix[i][row] == 1 or adj_matrix[row][i] == 1:
+                    continue
+                if row == i:
+                    continue
+                adj_matrix[i][row] = 1
+                adj_matrix[row][i] = 1
+                graph_sequence[row] -= 1
+                graph_sequence[i] -= 1
+                break
+    return adj_matrix
+
+def convert_adj_matrix_to_graph_seq(adjacency_matrix):
+    graph_seq = []
+    for i in range(len(adjacency_matrix)):
+        for j in range(len(adjacency_matrix[i])):
+            if adjacency_matrix[i][j] == 1:
+                graph_seq[i] += 1
+
+    graph_seq.sort()
+    graph_seq = graph_seq[::-1]
+    return graph_seq

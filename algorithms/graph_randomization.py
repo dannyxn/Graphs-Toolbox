@@ -1,5 +1,7 @@
-from core.graph_representation import GraphRepresentation, GraphRepresentationType
 from random import randint
+
+from core.graph_representation import GraphRepresentation, GraphRepresentationType
+
 
 
 def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) -> GraphRepresentation:
