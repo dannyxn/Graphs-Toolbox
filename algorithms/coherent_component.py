@@ -29,5 +29,10 @@ class CoherentComponentFinder:
                     self.components[other_node] = component_index
                     self._find_recursively(graph, component_index, other_node)
 
+    def check_if_graph_is_connected(self, graph: GraphRepresentation) -> bool:
+        if all(v == 1 for v in self.find(graph)):
+            return True
+        return False
+
 
 

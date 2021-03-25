@@ -15,7 +15,6 @@ def convert_adj_list_to_adj_matrix(adjacency_list):
     list_len = len(adjacency_list)
 
     adjacency_matrix = [[0 for j in range(list_len)] for i in range(list_len)]
-
     for i in range(list_len):
         for j in adjacency_list[i]:
             adjacency_matrix[i][j] = 1
