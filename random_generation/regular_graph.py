@@ -7,7 +7,6 @@ def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     reset = True
     graph = None
     while reset:
-        print('a')
         graph = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
         for _ in range(int((number_of_nodes * degree) / 2)):
             node1 = randint(0, number_of_nodes - 1)
