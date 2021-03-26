@@ -4,10 +4,8 @@ from visualization.circle_representation import display_weighted_nx_graph
 
 import networkx as nx
 
-
-
 if __name__ == "__main__":
-    G = generate_connected_graph(6,7)
+    G = generate_connected_graph(6, 7)
     adj_matrix = nx.to_numpy_array(G)
 
     dijkstra = DijkstraAlgorithm(adj_matrix)
