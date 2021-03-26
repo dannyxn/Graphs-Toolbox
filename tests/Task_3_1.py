@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 
-from random_generation.graph_generators import generate_connected_graph
+from random_generation.graph_generators import generate_connected_graph, convert_connected_graph_to_nx_graph
 
 if __name__ == "__main__":
-    G = generate_connected_graph(7, 8)
+    graph = generate_connected_graph(7, 8)
+    G = convert_connected_graph_to_nx_graph(graph)
     pos = nx.spring_layout(G)
     nx.draw(G, pos, with_labels=True)
     plt.draw()
