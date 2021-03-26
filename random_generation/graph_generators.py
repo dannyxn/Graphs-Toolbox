@@ -4,20 +4,30 @@ from random import randint, random
 import networkx as nx
 
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
-import scipy as sp
 
+
+#can be improved
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
-    G = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
-    for _ in range(number_of_edges):
-        x = randint(0, number_of_nodes - 1)
-        y = randint(0, number_of_nodes - 1)
-        while True:
-            if y != x and y not in G[x]:
-                break
-            y = randint(0, number_of_nodes - 1)
-        G[x].append(y)
-        G[y].append(x)
-    return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, G)
+    reset = True
+    graph = None
+    while reset:
+        graph = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
+        for _ in range(number_of_edges):
+            node1 = randint(0, number_of_nodes - 1)
+            node2 = randint(0, number_of_nodes - 1)
+            while node1==node2:
+                node2 = randint(0, number_of_nodes - 1)
+            graph[node1].append(node2)
+            graph[node2].append(node1)
+            reset = False
+            for node, neighbours in graph.items():
+                if node in neighbours:
+                    reset = True
+                for x in neighbours:
+                    if neighbours.count(x) != 1:
+                        reset = True
+    print(graph)
+    return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
 def generate_with_probability(number_of_nodes: int, probability: float):

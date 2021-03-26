@@ -6,6 +6,7 @@ import networkx as nx
 
 if __name__ == "__main__":
     G = generate_connected_graph(6, 7)
+
     adj_matrix = nx.to_numpy_array(G)
 
     dijkstra = DijkstraAlgorithm(adj_matrix)
