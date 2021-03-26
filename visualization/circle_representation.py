@@ -1,5 +1,8 @@
 import math
+
+import networkx as nx
 from PIL import Image, ImageDraw
+import matplotlib.pyplot as plt
 
 
 class CircleRepresentation:
@@ -56,3 +59,11 @@ class CircleRepresentation:
         x_pos = self.radius * (1 - math.cos(angle * node_index)) + self.border
         y_pos = self.radius * (1 - math.sin(angle * node_index)) + self.border
         return x_pos, y_pos
+
+def display_nx_graph(G: nx.Graph):
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True)
+    plt.draw()
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    plt.show()

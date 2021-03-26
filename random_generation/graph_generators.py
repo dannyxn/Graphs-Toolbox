@@ -4,7 +4,7 @@ from random import randint, random
 import networkx as nx
 
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
-
+import scipy as sp
 
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
     G = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
@@ -32,7 +32,7 @@ def generate_with_probability(number_of_nodes: int, probability: float):
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, G)
 
 
-def generate_connected_graph(nodes, paths) -> GraphRepresentation:
+def generate_connected_graph(nodes, paths) -> nx.Graph:
     finder = CoherentComponentFinder()
     while True:
         graph = generate_with_edges(nodes, paths)
@@ -40,13 +40,9 @@ def generate_connected_graph(nodes, paths) -> GraphRepresentation:
         if finder.check_if_graph_is_connected(graph):
             break
 
-    return graph
-
-
-def convert_connected_graph_to_nx_graph(graph: GraphRepresentation) -> nx.Graph:
     graph.convert(GraphRepresentationType.ADJACENCY_LIST)
     G = nx.Graph(graph.math_repr)
     for (u, v, w) in G.edges(data=True):
-        w['weight'] = randint(0, 10)
+        w['weight'] = randint(1, 10)
 
     return G
