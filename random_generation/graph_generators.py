@@ -15,7 +15,7 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
         for _ in range(number_of_edges):
             node1 = randint(0, number_of_nodes - 1)
             node2 = randint(0, number_of_nodes - 1)
-            while node1==node2:
+            while node1 == node2:
                 node2 = randint(0, number_of_nodes - 1)
             graph[node1].append(node2)
             graph[node2].append(node1)

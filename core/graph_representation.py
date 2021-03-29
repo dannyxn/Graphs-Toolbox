@@ -22,6 +22,22 @@ class GraphRepresentation:
     def __len__(self) -> int:
         return len(self.math_repr)
 
+    def __str__(self):
+        string_repr = ""
+        if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
+            string_repr += "Adjacency Matrix:\n"
+        elif self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
+            string_repr += "Adjacency List:\n"
+        elif self.repr_type == GraphRepresentationType.GRAPHIC_SEQUENCE:
+            string_repr += "Graphic Sequence:\n"
+        elif self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
+            string_repr += "Incidence matrix:\n"
+        else:
+            string_repr += "Unknown type:\n"
+
+        string_repr += str(self.math_repr)
+        return string_repr
+
     def display(self) -> None:
         if self.repr_type != GraphRepresentationType.ADJACENCY_LIST:
             raise NotImplementedError("Displaying only provided for ADJACENCY LIST")
