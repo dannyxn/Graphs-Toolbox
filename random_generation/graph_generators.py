@@ -1,5 +1,6 @@
 from collections import defaultdict
 from random import randint, random
+from algorithms.Kosaraju_algorithm import component_list
 
 import networkx as nx
 import numpy as np
@@ -65,5 +66,17 @@ def generate_diGraph_with_probability(number_of_nodes: int, probability: float) 
         for node2 in range(number_of_nodes):
             if random() < probability:
                 if node1 != node2:
-                        adjency_list[node1].append(node2)
+                    adjency_list[node1].append(node2)
     return nx.DiGraph(adjency_list)
+
+
+def generate_strongly_connected_di_graph_with_weights(num_of_nodes, probability, down_value, up_value):
+    while True:
+        G = generate_diGraph_with_probability(num_of_nodes, probability)
+        component = component_list(G)
+        if len(component) == 1:
+            break
+
+    for (u, v, w) in G.edges(data=True):
+        w['weight'] = randint(down_value, up_value)
+    return G
