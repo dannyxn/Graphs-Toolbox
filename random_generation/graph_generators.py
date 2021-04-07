@@ -2,11 +2,12 @@ from collections import defaultdict
 from random import randint, random
 
 import networkx as nx
+import numpy as np
 
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
 
 
-#can be improved
+# can be improved
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
     reset = True
     graph = None
@@ -15,7 +16,7 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
         for _ in range(number_of_edges):
             node1 = randint(0, number_of_nodes - 1)
             node2 = randint(0, number_of_nodes - 1)
-            while node1==node2:
+            while node1 == node2:
                 node2 = randint(0, number_of_nodes - 1)
             graph[node1].append(node2)
             graph[node2].append(node1)
@@ -31,7 +32,7 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
 
 
 def generate_with_probability(number_of_nodes: int, probability: float):
-    G = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
+    G = defaultdict(list, {node: [] for node in range(number_of_nodes)})
     for node1 in range(number_of_nodes):
         for node2 in range(node1, number_of_nodes):
             if random() < probability:
@@ -56,3 +57,13 @@ def generate_connected_graph(nodes, paths) -> nx.Graph:
         w['weight'] = randint(1, 10)
 
     return G
+
+
+def generate_diGraph_with_probability(number_of_nodes: int, probability: float) -> nx.DiGraph:
+    adjency_list = defaultdict(list, {node: [] for node in range(number_of_nodes)})
+    for node1 in range(number_of_nodes):
+        for node2 in range(number_of_nodes):
+            if random() < probability:
+                if node1 != node2:
+                        adjency_list[node1].append(node2)
+    return nx.DiGraph(adjency_list)

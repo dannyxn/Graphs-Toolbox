@@ -61,16 +61,4 @@ class CircleRepresentation:
         return x_pos, y_pos
 
 
-def display_weighted_nx_graph(G: nx.Graph):
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True)
-    plt.draw()
-    labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-    plt.show()
 
-
-def display_nx_graph(G: nx.Graph):
-    nx.draw(G, with_labels=True)
-    plt.draw()
-    plt.show()
