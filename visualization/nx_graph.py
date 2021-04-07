@@ -25,9 +25,9 @@ def display_nx_DiGraph(G: nx.DiGraph):
     plt.show()
 
 def display_weighted_nx_di_graph(G):
-    pos = nx.circular_layout(G)
-    nx.draw(G, pos, with_labels=True, connectionstyle='arc3, rad = 0.20')
+    pos = nx.shell_layout(G)
+    nx.draw(G, pos, with_labels=True)
     plt.draw()
     labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, label_pos=0.10)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, label_pos=0.15)
     plt.show()

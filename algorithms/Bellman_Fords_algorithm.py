@@ -2,11 +2,12 @@ import sys
 
 
 class BellmanFordAlgorithm:
-    def __init__(self, adj_matrix):
+    def __init__(self, adj_matrix, branch_matrix):
         self.number_of_nodes = len(adj_matrix)
         self.distance_tab = [0 for j in range(len(adj_matrix))]
         self.previous_node_tab = [0 for j in range(len(adj_matrix))]
         self.adj_matrix = adj_matrix
+        self.branch_matrix = branch_matrix
 
     def distances_init(self, source_node):
         for i in range(len(self.adj_matrix)):
@@ -26,11 +27,11 @@ class BellmanFordAlgorithm:
         for i in range(self.number_of_nodes - 1):
             for u in G:
                 for v in G:
-                    if self.adj_matrix[u][v] != 0:
+                    if self.branch_matrix[u][v]:
                         self.relaxation(u, v)
         for u in G:
             for v in G:
-                if self.adj_matrix[u][v] != 0:
+                if self.branch_matrix[u][v]:
                     if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix[u][v]):
                         return False
         return True
