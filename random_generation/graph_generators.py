@@ -9,6 +9,9 @@ from algorithms.coherent_component import GraphRepresentationType, GraphRepresen
 
 
 # can be improved
+from visualization.nx_graph import display_weighted_nx_di_graph
+
+
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
     reset = True
     graph = None
@@ -75,8 +78,20 @@ def generate_strongly_connected_di_graph_with_weights(num_of_nodes, probability,
         G = generate_diGraph_with_probability(num_of_nodes, probability)
         component = component_list(G)
         if len(component) == 1:
+            for u, v in component.items():
+                print(v, end=" ")
+            print()
             break
+    adj_matrix = nx.to_numpy_array(G)
+    branch_matrix = [[] for _ in G]
+    for i in range(len(adj_matrix)):
+        branch_matrix[i] = [False for _ in G]
+    for i in range(len(branch_matrix)):
+        for j in range(len(branch_matrix)):
+            if adj_matrix[i][j] != 0:
+                branch_matrix[i][j] = True
 
+    print(branch_matrix)
     for (u, v, w) in G.edges(data=True):
         w['weight'] = randint(down_value, up_value)
-    return G
+    return G, branch_matrix
