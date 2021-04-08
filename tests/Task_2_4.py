@@ -1,7 +1,9 @@
-from random_generation.euler_graph import generate_random_euler_graph
+from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
-
+# TODO waiting for graphic seq -> adj matrix convert fix
 if __name__ == "__main__":
-    graph = generate_random_euler_graph(8)
+    graphic_seq = [2, 2, 2, 2]
+    graph = GraphRepresentation(GraphRepresentationType.GRAPHIC_SEQUENCE, graphic_seq)
     print(graph)
-    graph.display()
+    graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
+    print(graph)

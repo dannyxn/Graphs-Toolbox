@@ -5,6 +5,8 @@ import random
 
 
 def generate_random_euler_graph(nodes: int) -> GraphRepresentation:
+    if nodes < 2:
+        raise ValueError("Invalid number of nodes provided")
     even_numbers_up_to_nodes = [number * 2 for number in range(1, nodes - 1)]
     graph = GraphRepresentation(GraphRepresentationType.GRAPHIC_SEQUENCE, [])
     is_graph_connected = False
