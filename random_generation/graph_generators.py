@@ -1,15 +1,9 @@
+import networkx as nx
+
 from collections import defaultdict
 from random import randint, random
 from algorithms.Kosaraju_algorithm import component_list
-
-import networkx as nx
-import numpy as np
-
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
-
-
-# can be improved
-from visualization.nx_graph import display_weighted_nx_di_graph
 
 
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:

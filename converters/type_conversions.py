@@ -5,7 +5,7 @@ def convert_adj_matrix_to_adj_list(adjacency_matrix):
     adj_list = defaultdict(list)
     for i in range(len(adjacency_matrix)):
         for j in range(len(adjacency_matrix[i])):
-            if adjacency_matrix[i][j] == 1:
+            if adjacency_matrix[i][j]:
                 adj_list[i].append(j)
 
     return adj_list
@@ -57,6 +57,7 @@ def convert_inc_matrix_to_adj_list(incidence_matrix):
 
     return OrderedDict(sorted(adjacency_list.items()))
 
+
 def convert_graph_seq_to_adj_matrix(graph_sequence):
     seq_len = len(graph_sequence)
     adj_matrix = [[0 for j in range(seq_len)] for i in range(seq_len)]
@@ -76,8 +77,9 @@ def convert_graph_seq_to_adj_matrix(graph_sequence):
                 break
     return adj_matrix
 
+
 def convert_adj_matrix_to_graph_seq(adjacency_matrix):
-    graph_seq = []
+    graph_seq = [0 for _ in range(len(adjacency_matrix))]
     for i in range(len(adjacency_matrix)):
         for j in range(len(adjacency_matrix[i])):
             if adjacency_matrix[i][j] == 1:
