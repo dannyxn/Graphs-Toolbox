@@ -1,7 +1,7 @@
 import networkx as nx
 
 from algorithms.Kosaraju_algorithm import component_list
-from random_generation.graph_generators import generate_diGraph_with_probability, \
+from random_generation.graph_generators import generate_digraph_with_probability, \
     generate_strongly_connected_di_graph_with_weights
 
 from algorithms.Bellman_Fords_algorithm import BellmanFordAlgorithm

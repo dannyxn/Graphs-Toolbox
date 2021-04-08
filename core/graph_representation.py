@@ -1,4 +1,5 @@
 from enum import Enum
+import networkx as nx
 
 from converters.type_conversions import (convert_adj_list_to_adj_matrix, convert_adj_matrix_to_adj_list,
                                          convert_adj_list_to_inc_matrix, convert_inc_matrix_to_adj_list,
@@ -55,7 +56,6 @@ class GraphRepresentation:
 
         elif destination_type == GraphRepresentationType.INCIDENCE_MATRIX:
             return self._convert_to_incidence_matrix()
-
         else:
             return False
 

@@ -1,10 +1,10 @@
-from random_generation.graph_generators import generate_diGraph_with_probability
-from visualization.nx_graph import display_nx_DiGraph
+from random_generation.graph_generators import generate_digraph_with_probability
+from visualization.nx_graph import display_nx_digraph
 import networkx as nx
 
 if __name__ == "__main__":
-    G = generate_diGraph_with_probability(7,0.3)
-    display_nx_DiGraph(G)
+    G = generate_digraph_with_probability(7, 0.3)
+    display_nx_digraph(G)
 
     g = nx.to_dict_of_lists(G)
     print("\n adjency list")
