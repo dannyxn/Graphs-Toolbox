@@ -2,11 +2,14 @@ import numpy as np
 
 from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
+
 def check_if_seq_is_graphic(sequence_of_numbers):
+    if len(sequence_of_numbers) == 0:
+        return False
+
     a = np.array(sequence_of_numbers)
     a.sort()
     a = a[::-1]
-    print(a)
 
     if a[a % 2 == 1].size % 2:
         return False
