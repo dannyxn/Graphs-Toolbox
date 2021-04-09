@@ -1,9 +1,17 @@
-from core.graph_representation import GraphRepresentation, GraphRepresentationType
+import networkx as nx
+from core.graph_representation import GraphRepresentationType
+from random_generation.graph_generators import generate_random_euler_graph
+from visualization.nx_graph import display_nx_graph
+from algorithms.euler_cycle import EulerCycleFinder
 
-# TODO waiting for graphic seq -> adj matrix convert fix
+
 if __name__ == "__main__":
-    graphic_seq = [2, 2, 2, 2]
-    graph = GraphRepresentation(GraphRepresentationType.GRAPHIC_SEQUENCE, graphic_seq)
-    print(graph)
-    graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
-    print(graph)
+    graph = generate_random_euler_graph(10)
+    graph.convert(GraphRepresentationType.ADJACENCY_LIST)
+
+    finder = EulerCycleFinder()
+    finder.find(graph)
+
+    graph = nx.Graph(graph.math_repr)
+    display_nx_graph(graph)
+

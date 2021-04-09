@@ -2,32 +2,32 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 
-def display_weighted_nx_graph(G):
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True)
+def display_weighted_nx_graph(graph):
+    pos = nx.spring_layout(graph)
+    nx.draw(graph, pos, with_labels=True)
     plt.draw()
-    labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    labels = nx.get_edge_attributes(graph, 'weight')
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
     plt.show()
 
 
-def display_nx_graph(G: nx.Graph):
-    nx.draw(G, with_labels=True)
-    plt.draw()
-    plt.show()
-
-
-def display_nx_DiGraph(G: nx.DiGraph):
-    pos = nx.shell_layout(G)
-    nx.draw(G, pos, node_size=1000, with_labels=True, connectionstyle='arc3, rad = 0.25')
+def display_nx_graph(graph: nx.Graph):
+    nx.draw(graph, with_labels=True)
     plt.draw()
     plt.show()
 
 
-def display_weighted_nx_di_graph(G):
-    pos = nx.shell_layout(G)
-    nx.draw(G, pos, with_labels=True)
+def display_nx_digraph(graph: nx.DiGraph):
+    pos = nx.shell_layout(graph)
+    nx.draw(graph, pos, node_size=1000, with_labels=True, connectionstyle='arc3, rad = 0.25')
     plt.draw()
-    labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, label_pos=0.15)
+    plt.show()
+
+
+def display_weighted_nx_di_graph(graph):
+    pos = nx.shell_layout(graph)
+    nx.draw(graph, pos, with_labels=True)
+    plt.draw()
+    labels = nx.get_edge_attributes(graph, 'weight')
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels, label_pos=0.15)
     plt.show()
