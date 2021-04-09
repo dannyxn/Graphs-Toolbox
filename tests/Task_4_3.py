@@ -19,6 +19,7 @@ if __name__ == "__main__":
     display_weighted_nx_di_graph(G)
 
     adj_matrix = nx.to_numpy_array(G)
+    adj_matrix = adj_matrix.tolist()
     print(adj_matrix)
 
     x = BellmanFordAlgorithm(adj_matrix, branch_matrix)

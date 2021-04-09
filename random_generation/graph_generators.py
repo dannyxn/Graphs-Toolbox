@@ -95,9 +95,9 @@ def generate_strongly_connected_di_graph_with_weights(num_of_nodes, probability,
         G = generate_digraph_with_probability(num_of_nodes, probability)
         component = component_list(G)
         if len(component) == 1:
-            for u, v in component.items():
-                print(v, end=" ")
-            print()
+            # for u, v in component.items():
+            #     print(v, end=" ")
+            # print()
             break
     adj_matrix = nx.to_numpy_array(G)
     branch_matrix = [[] for _ in G]
@@ -108,7 +108,7 @@ def generate_strongly_connected_di_graph_with_weights(num_of_nodes, probability,
             if adj_matrix[i][j] != 0:
                 branch_matrix[i][j] = True
 
-    print(branch_matrix)
+    # print(branch_matrix)
     for (u, v, w) in G.edges(data=True):
         w['weight'] = randint(down_value, up_value)
     return G, branch_matrix
