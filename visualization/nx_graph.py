@@ -1,5 +1,5 @@
-import networkx as nx
 import matplotlib.pyplot as plt
+import networkx as nx
 
 
 def display_weighted_nx_graph(graph):
@@ -30,4 +30,13 @@ def display_weighted_nx_di_graph(graph):
     plt.draw()
     labels = nx.get_edge_attributes(graph, 'weight')
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels, label_pos=0.15)
+    plt.show()
+
+
+def display_flow_network(graph: nx.DiGraph):
+    pos = nx.multipartite_layout(graph, subset_key="layer")
+    colors = nx.get_edge_attributes(graph, 'color').values()
+    plt.figure(figsize=(8, 8))
+    nx.draw(graph, pos, edge_color=colors, with_labels=True)
+    plt.axis("equal")
     plt.show()

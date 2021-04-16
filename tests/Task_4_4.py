@@ -12,7 +12,7 @@ if __name__ == "__main__":
     #               [0 ,2 ,0 ,2 ,0]
     # ]
 
-    G, branch_matrix = generate_strongly_connected_di_graph_with_weights(5, 0.6, -2, 10)
+    G, branch_matrix = generate_strongly_connected_di_graph_with_weights(3, 0.6, -5, 10)
     display_weighted_nx_di_graph(G)
 
     adj_matrix = nx.to_numpy_array(G)

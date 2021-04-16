@@ -1,10 +1,11 @@
-import networkx as nx
-
 from collections import defaultdict
 from random import randint, random, choice
+
+import networkx as nx
+
 from algorithms.Kosaraju_algorithm import component_list
-from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
 from algorithms.checkers import check_if_seq_is_graphic
+from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
 
 
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
@@ -135,3 +136,63 @@ def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
                 if neighbours.count(x) != 1:
                     reset = True
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
+
+
+class FLowNetworkGenerator:
+
+    def generate_flow_network(self, N: int) -> nx.DiGraph:
+        layers_edges = [1] + [randint(2, N) for _ in range(N)] + [1]
+        G = nx.DiGraph()
+        counter = 0
+        layer_c = 0
+        layers = []
+        for i in range(len(layers_edges)):
+            layers.append([])
+
+        max_edges = 0
+        for i in range(1, len(layers_edges) - 2):
+            max_edges += self.return_n(layers_edges[i] + layers_edges[i + 1])
+            if 1 < i < len(layers_edges) - 2:
+                max_edges -= self.return_n(layers_edges[i])
+
+        for i in layers_edges:
+            for j in range(i):
+                layers[layer_c].append(counter)
+                G.add_node(counter, layer=layer_c)
+                counter += 1
+            layer_c += 1
+
+        for i in range(1, len(layers) - 1):
+            for node in layers[i]:
+                G.add_edge(choice(layers[i - 1]), node, color='black')
+                G.add_edge(node, choice(layers[i + 1]), color='black')
+
+        all_edges = len(G.edges)
+        all_edges -= layers_edges[1]
+        all_edges -= layers_edges[len(layers_edges) - 2]
+
+        edges = 0
+        while edges < 2 * (len(layers) - 2) and all_edges < max_edges:
+            layer_1 = randint(1, len(layers) - 2)
+
+            if layer_1 == 1:
+                layer_2 = randint(1, 2)
+            elif layer_1 == len(layers) - 2:
+                layer_2 = randint(len(layers) - 3, len(layers) - 2)
+            else:
+                layer_2 = randint(layer_1 - 1, layer_1 + 1)
+
+            edge_1 = choice(layers[layer_1])
+            edge_2 = choice(layers[layer_2])
+
+            if G.has_edge(edge_1, edge_2) or G.has_edge(edge_2, edge_1) or edge_1 == edge_2:
+                continue
+            G.add_edge(edge_1, edge_2, color='red')
+            edges += 1
+            all_edges += 1
+
+        return G
+
+    @staticmethod
+    def return_n(n):
+        return (n * (n - 1)) / 2

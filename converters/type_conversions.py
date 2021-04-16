@@ -88,8 +88,8 @@ def convert_graph_seq_to_adj_matrix(graph_sequence):
         for x, (key, value) in enumerate(graph_sequence.items()):
             if x < y:
                 graph_sequence[key] -= 1
-                adj_matrix[key][node] = 1;
-                adj_matrix[node][key] = 1;
+                adj_matrix[key][node] = 1
+                adj_matrix[node][key] = 1
 
         graph_sequence = OrderedDict(sorted(graph_sequence.items(), key=lambda kv: kv[1], reverse=True))
         if sum(graph_sequence.values()) == 0:
