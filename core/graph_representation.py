@@ -1,5 +1,4 @@
 from enum import Enum
-import networkx as nx
 
 from converters.type_conversions import (convert_adj_list_to_adj_matrix, convert_adj_matrix_to_adj_list,
                                          convert_adj_list_to_inc_matrix, convert_inc_matrix_to_adj_list,
@@ -27,16 +26,25 @@ class GraphRepresentation:
         string_repr = ""
         if self.repr_type == GraphRepresentationType.ADJACENCY_MATRIX:
             string_repr += "Adjacency Matrix:\n"
+            for line in self.math_repr:
+                string_repr += str(line) + "\n"
         elif self.repr_type == GraphRepresentationType.ADJACENCY_LIST:
             string_repr += "Adjacency List:\n"
+            for i in range(len(self.math_repr)):
+                string_repr += str(i) + ". "
+                for j in self.math_repr[i]:
+                    string_repr += str(j) + " "
+                string_repr += "\n"
         elif self.repr_type == GraphRepresentationType.GRAPHIC_SEQUENCE:
             string_repr += "Graphic Sequence:\n"
+            string_repr += str(self.math_repr)
         elif self.repr_type == GraphRepresentationType.INCIDENCE_MATRIX:
             string_repr += "Incidence matrix:\n"
+            for line in self.math_repr:
+                string_repr += str(line) + "\n"
         else:
             string_repr += "Unknown type:\n"
 
-        string_repr += str(self.math_repr)
         return string_repr
 
     def display(self) -> None:
