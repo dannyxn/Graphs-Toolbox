@@ -62,14 +62,19 @@ def convert_graph_seq_to_adj_matrix(graph_sequence):
     seq_len = len(graph_sequence)
     adj_matrix = [[0 for _ in range(seq_len)] for _ in range(seq_len)]
     graph_sequence = list(sorted(graph_sequence, reverse=True))
-    graph_sequence = OrderedDict(zip(range(len(graph_sequence)), graph_sequence))
+    od = OrderedDict()
+    for i in range(len(graph_sequence)):
+        od[i] = graph_sequence[i]
+    graph_sequence = od
     while True:
         node, y = graph_sequence.popitem(last=False)
-        for x, (key, value) in enumerate(graph_sequence.items()):
+        x = 0
+        for key, value in graph_sequence.items():
             if x < y:
                 graph_sequence[key] -= 1
                 adj_matrix[key][node] = 1
                 adj_matrix[node][key] = 1
+            x += 1
 
         graph_sequence = OrderedDict(sorted(graph_sequence.items(), key=lambda kv: kv[1], reverse=True))
         if sum(graph_sequence.values()) == 0:
