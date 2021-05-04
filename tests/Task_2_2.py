@@ -18,7 +18,9 @@ if __name__ == "__main__":
     graph = GraphRepresentation(GraphRepresentationType.ADJACENCY_MATRIX, adjacency_matrix)
     graph.convert(GraphRepresentationType.ADJACENCY_LIST)
     graph.display()
+    print(graph)
 
     randomized_graph = randomize_graph(graph, 10)
     randomized_graph.convert(GraphRepresentationType.ADJACENCY_LIST)
     randomized_graph.display()
+    print(randomized_graph)

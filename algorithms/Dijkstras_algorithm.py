@@ -1,25 +1,25 @@
 import sys
 
 
-class DijkstraAlgorithm():
-    def __init__(self, adj_matrix, branch_matrix):
+class DijkstraAlgorithm:
+    def __init__(self, adj_matrix: list, branch_matrix: list):
         self.distance_tab = [0 for j in range(len(adj_matrix))]
         self.previous_node_tab = [0 for j in range(len(adj_matrix))]
         self.adj_matrix = adj_matrix
         self.branch_matrix = branch_matrix
 
-    def distances_init(self, source_node):
+    def distances_init(self, source_node: int):
         for i in range(len(self.adj_matrix)):
             self.distance_tab[i] = sys.maxsize
             self.previous_node_tab[i] = None
         self.distance_tab[source_node] = 0
 
-    def relaxation(self, u, v):
+    def relaxation(self, u: int, v: int):
         if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix[u][v]):
             self.distance_tab[v] = self.distance_tab[u] + self.adj_matrix[u][v]
             self.previous_node_tab[v] = u
 
-    def find_shortest_path(self, source_node):
+    def find_shortest_path(self, source_node: int):
         self.distances_init(source_node)
         S = []
         G = [j for j in range(len(self.adj_matrix))]
@@ -38,7 +38,12 @@ class DijkstraAlgorithm():
                 if self.branch_matrix[u][v]:
                     self.relaxation(u, v)
 
-    def all_shortest_paths(self, source_node):
+    """
+        all_shortest_paths method prints all 
+        shortest paths from given node to others
+    """
+
+    def all_shortest_paths(self, source_node: int):
         print("Distances from node: {}".format(source_node))
         self.find_shortest_path(source_node)
         for i in range(len(self.distance_tab)):
@@ -58,6 +63,11 @@ class DijkstraAlgorithm():
             path_string += "]"
             print(path_string)
 
+    """
+        create_distance_matrix method calculates and returns 
+        distance_matrix between each node in graph
+    """
+
     def create_distance_matrix(self):
         distance_matrix = []
         for i in range(len(self.adj_matrix)):
@@ -70,6 +80,10 @@ class DijkstraAlgorithm():
         return self.distance_tab.copy()
 
 
+"""
+    method generates matrix of bools representing 
+    whether there is a branch between two nodes
+"""
 def generate_branch_matrix(adj_matrix):
     G = [j for j in range(len(adj_matrix))]
     branch_matrix = [[] for _ in G]

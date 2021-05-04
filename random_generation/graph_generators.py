@@ -46,6 +46,19 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
+"""
+generate_with_probability method generate undirected graph based 
+on the number of nodes and probability.
+
+:param number_of_nodes: Int type number of nodes
+:param number_of_edges: Float type number of the probability that
+    there is an edge between two nodes
+
+:return: Generated graph
+:rtype: Adjacency List GraphRepresentation
+"""
+
+
 def generate_with_probability(number_of_nodes: int, probability: float) -> GraphRepresentation:
     G = defaultdict(list, {node: [] for node in range(number_of_nodes)})
     for node1 in range(number_of_nodes):
