@@ -1,8 +1,11 @@
 import math
 
-import networkx as nx
 from PIL import Image, ImageDraw
-import matplotlib.pyplot as plt
+
+"""
+Class CircleRepresentation contains methods 
+for displaying undirected graphs using the PIL library.
+"""
 
 
 class CircleRepresentation:
@@ -59,6 +62,3 @@ class CircleRepresentation:
         x_pos = self.radius * (1 - math.cos(angle * node_index)) + self.border
         y_pos = self.radius * (1 - math.sin(angle * node_index)) + self.border
         return x_pos, y_pos
-
-
-

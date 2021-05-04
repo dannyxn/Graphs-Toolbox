@@ -1,6 +1,9 @@
 from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
-
+"""
+CoherentComponentFinder class contains methods used to find 
+the biggest coherent component in given graph.
+"""
 class CoherentComponentFinder:
     def __init__(self):
         self.components = []
@@ -32,7 +35,3 @@ class CoherentComponentFinder:
     # should be moved to algorithms/checkers
     def check_if_graph_is_connected(self, graph: GraphRepresentation) -> bool:
         return all(v == 1 for v in self.find(graph))
-
-
-
-

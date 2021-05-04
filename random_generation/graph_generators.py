@@ -6,6 +6,22 @@ import networkx as nx
 from algorithms.Kosaraju_algorithm import component_list
 from algorithms.checkers import check_if_seq_is_graphic
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
+from algorithms.graph_randomization import randomize_graph
+
+"""
+This file contains methods to generate various types of graphs.
+"""
+
+"""
+generate_with_edges method generate undirected graph based 
+on the number of nodes and edges.
+
+:param number_of_nodes: Int type number of nodes
+:param number_of_edges: Int type number of edges
+
+:return: Generated graph
+:rtype: Adjacency List GraphRepresentation
+"""
 
 
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
@@ -41,6 +57,17 @@ def generate_with_probability(number_of_nodes: int, probability: float) -> Graph
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, G)
 
 
+"""
+generate_random_euler_graph method generate undirected graph based 
+on the number of nodes.
+
+:param nodes: Int type number of nodes
+
+:return: Generated graph
+:rtype: Adjacency List GraphRepresentation
+"""
+
+
 def generate_random_euler_graph(nodes: int) -> GraphRepresentation:
     if nodes <= 2:
         raise ValueError("Invalid number of nodes provided")
@@ -63,7 +90,19 @@ def generate_random_euler_graph(nodes: int) -> GraphRepresentation:
     return graph
 
 
-def generate_connected_graph(nodes, paths) -> nx.Graph:
+"""
+generate_connected_graph method generate connected graph based 
+on the number of nodes and paths.
+
+:param nodes: Int type number of nodes
+:param paths: Int type number of paths
+
+:return: Generated connected graph
+:rtype: nx.Graph
+"""
+
+
+def generate_connected_graph(nodes: int, paths: int) -> nx.Graph:
     finder = CoherentComponentFinder()
     while True:
         graph = generate_with_edges(nodes, paths)
@@ -79,6 +118,19 @@ def generate_connected_graph(nodes, paths) -> nx.Graph:
     return G
 
 
+"""
+generate_digraph_with_probability method generate digraph based 
+on the number of nodes and probability.
+
+:param number_of_nodes: Int type number of nodes
+:param probability: Float type number of probability that
+    there is an edge between two nodes
+
+:return: Generated digraph
+:rtype: nx.DiGraph
+"""
+
+
 def generate_digraph_with_probability(number_of_nodes: int, probability: float) -> nx.DiGraph:
     adjacency_list = defaultdict(list, {node: [] for node in range(number_of_nodes)})
     for node1 in range(number_of_nodes):
@@ -89,14 +141,27 @@ def generate_digraph_with_probability(number_of_nodes: int, probability: float) 
     return nx.DiGraph(adjacency_list)
 
 
-def generate_strongly_connected_di_graph_with_weights(num_of_nodes, probability, down_value, up_value):
+"""
+generate_strongly_connected_di_graph_with_weights method generate digraph 
+with weights based on the number of nodes, probability and weight range
+
+:param number_of_nodes: Int type number of nodes
+:param probability: Float type number of probability that
+    there is an edge between two nodes
+:param down_value: Int type number representing the lower weight range
+:param up_value: Int type number representing the upper weight range
+
+:return: Generated digraph and matrix of branches
+:rtype: tuple of nx.DiGraph and list[list]
+"""
+
+
+def generate_strongly_connected_di_graph_with_weights(num_of_nodes: int, probability: float, down_value: int = -5,
+                                                      up_value: int = 10) -> tuple[nx.DiGraph, list[list]]:
     while True:
         G = generate_digraph_with_probability(num_of_nodes, probability)
         component = component_list(G)
         if len(component) == 1:
-            # for u, v in component.items():
-            #     print(v, end=" ")
-            # print()
             break
     adj_matrix = nx.to_numpy_array(G)
     branch_matrix = [[] for _ in G]
@@ -107,11 +172,21 @@ def generate_strongly_connected_di_graph_with_weights(num_of_nodes, probability,
             if adj_matrix[i][j] != 0:
                 branch_matrix[i][j] = True
 
-    # print(branch_matrix)
     for (u, v, w) in G.edges(data=True):
         w['weight'] = randint(down_value, up_value)
     return G, branch_matrix
 
+
+"""
+k_regular_graph method generate undirected k regular graph based 
+on the number of nodes and degree.
+
+:param number_of_nodes: Int type number of nodes
+:param degree: Int type number of degree
+
+:return: Generated graph
+:rtype: Adjacency List GraphRepresentation
+"""
 
 def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     reset = True
@@ -135,6 +210,11 @@ def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
                     reset = True
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
+
+"""
+Class FLowNetworkGenerator contains methods used to generate
+random flow network between single source and single sink. 
+"""
 
 class FLowNetworkGenerator:
 

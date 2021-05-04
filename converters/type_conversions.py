@@ -75,7 +75,6 @@ def convert_graph_seq_to_adj_matrix(graph_sequence):
                 adj_matrix[key][node] = 1
                 adj_matrix[node][key] = 1
             x += 1
-
         graph_sequence = OrderedDict(sorted(graph_sequence.items(), key=lambda kv: kv[1], reverse=True))
         if sum(graph_sequence.values()) == 0:
             break
