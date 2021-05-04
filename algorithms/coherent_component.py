@@ -4,8 +4,6 @@ from core.graph_representation import GraphRepresentation, GraphRepresentationTy
 CoherentComponentFinder class contains methods used to find 
 the biggest coherent component in given graph.
 """
-
-
 class CoherentComponentFinder:
     def __init__(self):
         self.components = []
@@ -24,13 +22,7 @@ class CoherentComponentFinder:
                     self.components[node] = component_index
                     self._find_recursively(graph, component_index, node)
 
-            most_common_component = max(self.components, key=self.components.count)
-            new_components = []
-            for i in range(len(self.components)):
-                if self.components[i] == most_common_component:
-                    new_components.append(i+1)
-
-            return new_components
+            return self.components
 
     def _find_recursively(self, graph: GraphRepresentation, component_index: int, node: int) -> None:
         for other_node in range(len(graph)):
