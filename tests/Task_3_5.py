@@ -7,5 +7,3 @@ if __name__ == "__main__":
     display_weighted_nx_graph(graph)
     minimum_spanning_tree = find_minimum_spanning_tree(graph)
     display_weighted_nx_graph(minimum_spanning_tree)
-
-
