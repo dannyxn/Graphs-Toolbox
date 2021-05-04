@@ -1,5 +1,4 @@
-from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation
-from random_generation.regular_graph import k_regular_graph
+from random_generation.graph_generators import k_regular_graph
 
 
 if __name__ == "__main__":

@@ -27,11 +27,10 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
                 for x in neighbours:
                     if neighbours.count(x) != 1:
                         reset = True
-    print(graph)
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
-def generate_with_probability(number_of_nodes: int, probability: float):
+def generate_with_probability(number_of_nodes: int, probability: float) -> GraphRepresentation:
     G = defaultdict(list, {node: [] for node in range(number_of_nodes)})
     for node1 in range(number_of_nodes):
         for node2 in range(node1, number_of_nodes):
@@ -39,7 +38,6 @@ def generate_with_probability(number_of_nodes: int, probability: float):
                 if node1 != node2:
                     G[node1].append(node2)
                     G[node2].append(node1)
-    print(G)
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, G)
 
 
@@ -119,7 +117,7 @@ def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     reset = True
     graph = None
     while reset:
-        graph = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
+        graph = defaultdict(list, {node: [] for node in range(number_of_nodes)})
         for _ in range(int((number_of_nodes * degree) / 2)):
             node1 = randint(0, number_of_nodes - 1)
             node2 = randint(0, number_of_nodes - 1)
