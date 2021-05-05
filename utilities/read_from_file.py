@@ -1,12 +1,11 @@
 from collections import defaultdict
 
-
-"""
-    adjacency_matrix_from_file method reads adjacency matrix from file 
-    operated file format is:
-    each lines contains one row with values separated by empty spaces
-"""
 def adjacency_matrix_from_file(file_name: str) -> list:
+    """
+        adjacency_matrix_from_file method reads adjacency matrix from file
+        operated file format is:
+        each lines contains one row with values separated by empty spaces
+    """
     matrix = []
     with open(file_name, 'r') as file:
         while True:
@@ -22,12 +21,12 @@ def adjacency_matrix_from_file(file_name: str) -> list:
     return matrix
 
 
-"""
-    incidence_matrix_from_file method reads incidence matrix from file 
-    operated file format is:
-    each lines contains one row with values separated by empty spaces
-"""
 def incidence_matrix_from_file(file_name: str) -> list:
+    """
+        incidence_matrix_from_file method reads incidence matrix from file
+        operated file format is:
+        each lines contains one row with values separated by empty spaces
+    """
     return adjacency_matrix_from_file(file_name)
 
 

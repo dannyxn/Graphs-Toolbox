@@ -5,27 +5,24 @@ from converters.type_conversions import (convert_adj_list_to_adj_matrix, convert
                                          convert_adj_matrix_to_graph_seq, convert_graph_seq_to_adj_matrix)
 from visualization.circle_representation import CircleRepresentation
 
-"""
-This enum class contains all possible graph representations
-"""
-
 
 class GraphRepresentationType(Enum):
+    """
+    This enum class contains all possible graph representations
+    """
     ADJACENCY_MATRIX = 1
     ADJACENCY_LIST = 2
     GRAPHIC_SEQUENCE = 3
     INCIDENCE_MATRIX = 4
 
 
-"""
-Class GraphRepresentation represents graph in any of the math representation
-declared in GraphRepresentationType class. Class contains methods to:
-- display using the CircleRepresentation class
-- convert graph to other math representation using methods from type_conversions
-"""
-
-
 class GraphRepresentation:
+    """
+    Class GraphRepresentation represents graph in any of the math representation
+    declared in GraphRepresentationType class. Class contains methods to:
+    - display using the CircleRepresentation class
+    - convert graph to other math representation using methods from type_conversions
+    """
     def __init__(self, repr_type: GraphRepresentationType, math_repr):
         self.repr_type = repr_type
         self.math_repr = math_repr
