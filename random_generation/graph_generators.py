@@ -2,6 +2,7 @@ from collections import defaultdict
 from random import randint, random, choice
 
 import networkx as nx
+from typing import Tuple, List
 
 from algorithms.Kosaraju_algorithm import component_list
 from algorithms.checkers import check_if_seq_is_graphic
@@ -170,7 +171,7 @@ with weights based on the number of nodes, probability and weight range
 
 
 def generate_strongly_connected_di_graph_with_weights(num_of_nodes: int, probability: float, down_value: int = -5,
-                                                      up_value: int = 10) -> tuple[nx.DiGraph, list[list]]:
+                                                      up_value: int = 10) -> Tuple[nx.DiGraph, List[list]]:
     while True:
         G = generate_digraph_with_probability(num_of_nodes, probability)
         component = component_list(G)

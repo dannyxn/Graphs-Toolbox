@@ -6,7 +6,7 @@ from collections import defaultdict, OrderedDict
 """
 
 
-def convert_adj_matrix_to_adj_list(adjacency_matrix: list) -> defaultdict[list]:
+def convert_adj_matrix_to_adj_list(adjacency_matrix: list) -> defaultdict:
     adj_list = defaultdict(list)
     for i in range(len(adjacency_matrix)):
         for j in range(len(adjacency_matrix[i])):
@@ -22,7 +22,7 @@ def convert_adj_matrix_to_adj_list(adjacency_matrix: list) -> defaultdict[list]:
 """
 
 
-def convert_adj_list_to_adj_matrix(adjacency_list: defaultdict[list]) -> list:
+def convert_adj_list_to_adj_matrix(adjacency_list: defaultdict) -> list:
     list_len = len(adjacency_list)
 
     adjacency_matrix = [[0 for _ in range(list_len)] for _ in range(list_len)]
@@ -39,7 +39,7 @@ def convert_adj_list_to_adj_matrix(adjacency_list: defaultdict[list]) -> list:
 """
 
 
-def convert_adj_list_to_inc_matrix(adjacency_list: defaultdict[list]) -> list:
+def convert_adj_list_to_inc_matrix(adjacency_list: defaultdict) -> list:
     edges = 0
     list_len = 0
     for i in adjacency_list:
