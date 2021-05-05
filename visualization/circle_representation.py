@@ -2,13 +2,12 @@ import math
 
 from PIL import Image, ImageDraw
 
-"""
-Class CircleRepresentation contains methods 
-for displaying undirected graphs using the PIL library.
-"""
-
 
 class CircleRepresentation:
+    """
+    Class CircleRepresentation contains methods
+    for displaying undirected graphs using the PIL library.
+    """
     def __init__(self):
         self.size_x, self.size_y = 800, 800  # image size
         self.radius = 350  # layout circle radius

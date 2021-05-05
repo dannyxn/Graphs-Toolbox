@@ -8,25 +8,23 @@ from algorithms.Kosaraju_algorithm import component_list
 from algorithms.checkers import check_if_seq_is_graphic
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
 from algorithms.graph_randomization import randomize_graph
-from converters.type_conversions import convert_graph_seq_to_adj_matrix, convert_adj_matrix_to_adj_list
 
 """
 This file contains methods to generate various types of graphs.
 """
 
-"""
-generate_with_edges method generate undirected graph based 
-on the number of nodes and edges.
-
-:param number_of_nodes: Int type number of nodes
-:param number_of_edges: Int type number of edges
-
-:return: Generated graph
-:rtype: Adjacency List GraphRepresentation
-"""
-
 
 def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepresentation:
+    """
+    generate_with_edges method generate undirected graph based
+    on the number of nodes and edges.
+
+    :param number_of_nodes: Int type number of nodes
+    :param number_of_edges: Int type number of edges
+
+    :return: Generated graph
+    :rtype: Adjacency List GraphRepresentation
+    """
     reset = True
     graph = None
     while reset:
@@ -48,20 +46,18 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
-"""
-generate_with_probability method generate undirected graph based 
-on the number of nodes and probability.
-
-:param number_of_nodes: Int type number of nodes
-:param number_of_edges: Float type number of the probability that
-    there is an edge between two nodes
-
-:return: Generated graph
-:rtype: Adjacency List GraphRepresentation
-"""
-
-
 def generate_with_probability(number_of_nodes: int, probability: float) -> GraphRepresentation:
+    """
+    generate_with_probability method generate undirected graph based
+    on the number of nodes and probability.
+
+    :param number_of_nodes: Int type number of nodes
+    :param number_of_edges: Float type number of the probability that
+        there is an edge between two nodes
+
+    :return: Generated graph
+    :rtype: Adjacency List GraphRepresentation
+    """
     G = defaultdict(list, {node: [] for node in range(number_of_nodes)})
     for node1 in range(number_of_nodes):
         for node2 in range(node1, number_of_nodes):
@@ -72,18 +68,16 @@ def generate_with_probability(number_of_nodes: int, probability: float) -> Graph
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, G)
 
 
-"""
-generate_random_euler_graph method generate undirected graph based 
-on the number of nodes.
-
-:param nodes: Int type number of nodes
-
-:return: Generated graph
-:rtype: Adjacency List GraphRepresentation
-"""
-
-
 def generate_random_euler_graph(nodes: int) -> GraphRepresentation:
+    """
+    generate_random_euler_graph method generate undirected graph based
+    on the number of nodes.
+
+    :param nodes: Int type number of nodes
+
+    :return: Generated graph
+    :rtype: Adjacency List GraphRepresentation
+    """
     if nodes <= 2:
         raise ValueError("Invalid number of nodes provided")
     even_numbers_up_to_nodes = [number * 2 for number in range(1, nodes - 1)]
@@ -105,19 +99,17 @@ def generate_random_euler_graph(nodes: int) -> GraphRepresentation:
     return graph
 
 
-"""
-generate_connected_graph method generate connected graph based 
-on the number of nodes and paths.
-
-:param nodes: Int type number of nodes
-:param paths: Int type number of paths
-
-:return: Generated connected graph
-:rtype: nx.Graph
-"""
-
-
 def generate_connected_graph(nodes: int, paths: int) -> nx.Graph:
+    """
+    generate_connected_graph method generate connected graph based
+    on the number of nodes and paths.
+
+    :param nodes: Int type number of nodes
+    :param paths: Int type number of paths
+
+    :return: Generated connected graph
+    :rtype: nx.Graph
+    """
     finder = CoherentComponentFinder()
     while True:
         graph = generate_with_edges(nodes, paths)
@@ -133,20 +125,18 @@ def generate_connected_graph(nodes: int, paths: int) -> nx.Graph:
     return G
 
 
-"""
-generate_digraph_with_probability method generate digraph based 
-on the number of nodes and probability.
-
-:param number_of_nodes: Int type number of nodes
-:param probability: Float type number of probability that
-    there is an edge between two nodes
-
-:return: Generated digraph
-:rtype: nx.DiGraph
-"""
-
-
 def generate_digraph_with_probability(number_of_nodes: int, probability: float) -> nx.DiGraph:
+    """
+    generate_digraph_with_probability method generate digraph based
+    on the number of nodes and probability.
+
+    :param number_of_nodes: Int type number of nodes
+    :param probability: Float type number of probability that
+        there is an edge between two nodes
+
+    :return: Generated digraph
+    :rtype: nx.DiGraph
+    """
     adjacency_list = defaultdict(list, {node: [] for node in range(number_of_nodes)})
     for node1 in range(number_of_nodes):
         for node2 in range(number_of_nodes):
@@ -156,23 +146,21 @@ def generate_digraph_with_probability(number_of_nodes: int, probability: float) 
     return nx.DiGraph(adjacency_list)
 
 
-"""
-generate_strongly_connected_di_graph_with_weights method generate digraph 
-with weights based on the number of nodes, probability and weight range
-
-:param number_of_nodes: Int type number of nodes
-:param probability: Float type number of probability that
-    there is an edge between two nodes
-:param down_value: Int type number representing the lower weight range
-:param up_value: Int type number representing the upper weight range
-
-:return: Generated digraph and matrix of branches
-:rtype: tuple of nx.DiGraph and list[list]
-"""
-
-
 def generate_strongly_connected_di_graph_with_weights(num_of_nodes: int, probability: float, down_value: int = -5,
                                                       up_value: int = 10) -> Tuple[nx.DiGraph, List[list]]:
+    """
+    generate_strongly_connected_di_graph_with_weights method generate digraph
+    with weights based on the number of nodes, probability and weight range
+
+    :param number_of_nodes: Int type number of nodes
+    :param probability: Float type number of probability that
+        there is an edge between two nodes
+    :param down_value: Int type number representing the lower weight range
+    :param up_value: Int type number representing the upper weight range
+
+    :return: Generated digraph and matrix of branches
+    :rtype: tuple of nx.DiGraph and list[list]
+    """
     while True:
         G = generate_digraph_with_probability(num_of_nodes, probability)
         component = component_list(G)
@@ -192,31 +180,44 @@ def generate_strongly_connected_di_graph_with_weights(num_of_nodes: int, probabi
     return G, branch_matrix
 
 
-"""
-k_regular_graph method generate undirected k regular graph based 
-on the number of nodes and degree.
-
-:param number_of_nodes: Int type number of nodes
-:param degree: Int type number of degree
-
-:return: Generated graph
-:rtype: Adjacency List GraphRepresentation
-"""
-
-
 def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
-    graph_sequence = [degree for _ in range(number_of_nodes)]
-    graph = convert_adj_matrix_to_adj_list( convert_graph_seq_to_adj_matrix(graph_sequence) )
+    """
+    k_regular_graph method generate undirected k regular graph based
+    on the number of nodes and degree.
+
+    :param number_of_nodes: Int type number of nodes
+    :param degree: Int type number of degree
+
+    :return: Generated graph
+    :rtype: Adjacency List GraphRepresentation
+    """
+    reset = True
+    graph = None
+    while reset:
+        graph = defaultdict(list, {node: [] for node in range(number_of_nodes)})
+        for _ in range(int((number_of_nodes * degree) / 2)):
+            node1 = randint(0, number_of_nodes - 1)
+            node2 = randint(0, number_of_nodes - 1)
+            while node1 == node2:
+                node1 = randint(0, number_of_nodes - 1)
+                node2 = randint(0, number_of_nodes - 1)
+            graph[node1].append(node2)
+            graph[node2].append(node1)
+        reset = False
+        for node, neighbours in graph.items():
+            if node in neighbours or len(neighbours) != degree:
+                reset = True
+            for x in neighbours:
+                if neighbours.count(x) != 1:
+                    reset = True
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
-"""
-Class FLowNetworkGenerator contains methods used to generate
-random flow network between single source and single sink. 
-"""
-
-
 class FLowNetworkGenerator:
+    """
+    Class FLowNetworkGenerator contains methods used to generate
+    random flow network between single source and single sink.
+    """
 
     def generate_flow_network(self, N: int) -> nx.DiGraph:
         layers_edges = [1] + [randint(2, N) for _ in range(N)] + [1]

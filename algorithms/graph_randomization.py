@@ -1,18 +1,17 @@
 from random import randint
-
 from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
-"""
-randomize_graph method randomizes given graph specific number of times
-
-:param graph: GraphRepresentation type graph
-:param number_of_randomization: Int type number of randomization
-
-:return: Randomized graph
-:rtype: Adjacency Matrix GraphRepresentation
-"""
 
 def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) -> GraphRepresentation:
+    """
+    randomize_graph method randomizes given graph specific number of times
+
+    :param graph: GraphRepresentation type graph
+    :param number_of_randomization: Int type number of randomization
+
+    :return: Randomized graph
+    :rtype: Adjacency Matrix GraphRepresentation
+    """
     graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
     adjacency_matrix = graph.math_repr
     number_of_nodes = len(adjacency_matrix)

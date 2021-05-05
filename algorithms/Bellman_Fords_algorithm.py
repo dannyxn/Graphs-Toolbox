@@ -1,11 +1,11 @@
 import sys
 
-"""
-Class BellmanFordAlgorithm contains methods used to find
-the shortest path using Bellman Ford algorithm.
-"""
 
 class BellmanFordAlgorithm:
+    """
+    Class BellmanFordAlgorithm contains methods used to find
+    the shortest path using Bellman Ford algorithm.
+    """
     def __init__(self, adj_matrix, branch_matrix):
         self.number_of_nodes = len(adj_matrix)
         self.distance_tab = [0 for _ in range(len(adj_matrix))]

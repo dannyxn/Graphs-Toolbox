@@ -2,17 +2,16 @@ import numpy as np
 
 from core.graph_representation import GraphRepresentation, GraphRepresentationType
 
-"""
-check_if_seq_is_graphic method check if given list of numbers 
-is graphic sequence
-
-:param sequence_of_numbers: List of numbers
-:return: True if the given list is graphic sequence, false otherwise
-:rtype: bool
-"""
-
 
 def check_if_seq_is_graphic(sequence_of_numbers: list) -> bool:
+    """
+    check_if_seq_is_graphic method check if given list of numbers
+    is graphic sequence
+
+    :param sequence_of_numbers: List of numbers
+    :return: True if the given list is graphic sequence, false otherwise
+    :rtype: bool
+    """
     if len(sequence_of_numbers) == 0:
         return False
 

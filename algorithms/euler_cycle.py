@@ -4,13 +4,12 @@ from core.graph_representation import GraphRepresentationType, GraphRepresentati
 from collections import defaultdict
 from copy import deepcopy
 
-"""
-EulerCycleFinder class contains methods used to find euler cycle
-inside given graph.
-"""
-
 
 class EulerCycleFinder:
+    """
+    EulerCycleFinder class contains methods used to find euler cycle
+    inside given graph.
+    """
     def __init__(self):
         self.no_nodes = 0
         self.result = []
