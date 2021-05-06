@@ -34,7 +34,8 @@ def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) ->
                     break
 
             if (adjacency_matrix[node_a][node_d] == 0) and (
-                    adjacency_matrix[node_b][node_c] == 0) and node_a != node_d and node_b != node_c:
+                    adjacency_matrix[node_b][node_c] == 0) and node_a != node_d and node_b != node_c \
+                    and node_a != node_c:
                 break
 
         adjacency_matrix[node_a][node_b] = 0
