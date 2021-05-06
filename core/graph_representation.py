@@ -57,8 +57,7 @@ class GraphRepresentation:
         return string_repr
 
     def display(self) -> None:
-        if self.repr_type != GraphRepresentationType.ADJACENCY_LIST:
-            raise NotImplementedError("Displaying only provided for ADJACENCY LIST")
+        self.convert(GraphRepresentationType.ADJACENCY_LIST)
         self.graphic_repr.display(self.math_repr)
 
     def convert(self, destination_type: GraphRepresentationType) -> bool:

@@ -1,13 +1,12 @@
 from collections import defaultdict
 from random import randint, random, choice
+from typing import Tuple, List
 
 import networkx as nx
-from typing import Tuple, List
 
 from algorithms.Kosaraju_algorithm import component_list
 from algorithms.checkers import check_if_seq_is_graphic
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
-from algorithms.graph_randomization import randomize_graph
 
 """
 This file contains methods to generate various types of graphs.
@@ -25,25 +24,17 @@ def generate_with_edges(number_of_nodes: int, number_of_edges: int) -> GraphRepr
     :return: Generated graph
     :rtype: Adjacency List GraphRepresentation
     """
-    reset = True
-    graph = None
-    while reset:
-        graph = defaultdict(list, {degree: [] for degree in range(number_of_nodes)})
-        for _ in range(number_of_edges):
-            node1 = randint(0, number_of_nodes - 1)
-            node2 = randint(0, number_of_nodes - 1)
-            while node1 == node2:
-                node2 = randint(0, number_of_nodes - 1)
-            graph[node1].append(node2)
-            graph[node2].append(node1)
-            reset = False
-            for node, neighbours in graph.items():
-                if node in neighbours:
-                    reset = True
-                for x in neighbours:
-                    if neighbours.count(x) != 1:
-                        reset = True
-    return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
+    generated_edges = 0
+    graph = [[0 for _ in range(number_of_nodes)] for _ in range(number_of_nodes)]
+    while generated_edges < number_of_edges:
+        node1 = choice(range(number_of_nodes))
+        node2 = choice(range(number_of_nodes))
+        if graph[node1][node2] == 0 and node1 != node2:
+            graph[node1][node2] = 1
+            graph[node2][node1] = 1
+            generated_edges += 1
+
+    return GraphRepresentation(GraphRepresentationType.ADJACENCY_MATRIX, graph)
 
 
 def generate_with_probability(number_of_nodes: int, probability: float) -> GraphRepresentation:
@@ -113,7 +104,6 @@ def generate_connected_graph(nodes: int, paths: int) -> nx.Graph:
     finder = CoherentComponentFinder()
     while True:
         graph = generate_with_edges(nodes, paths)
-        graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
         if finder.check_if_graph_is_connected(graph):
             break
 

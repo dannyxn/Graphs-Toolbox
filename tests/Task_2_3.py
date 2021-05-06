@@ -7,7 +7,6 @@ if __name__ == "__main__":
     graph = GraphRepresentation(GraphRepresentationType.ADJACENCY_MATRIX, raw_adjacency_matrix)
     finder = CoherentComponentFinder()
     components = finder.find(graph)
-    # print(finder.find(graph))
     most_common_component = max(components, key=components.count)
     new_components = []
     for i in range(len(components)):
