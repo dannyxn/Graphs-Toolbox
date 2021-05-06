@@ -1,5 +1,4 @@
 from random_generation.graph_generators import generate_with_probability, generate_with_edges
-import time
 
 if __name__ == "__main__":
     graph = generate_with_edges(10, 15)
