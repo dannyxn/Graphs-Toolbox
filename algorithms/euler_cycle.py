@@ -1,8 +1,6 @@
-from random import random
+from copy import deepcopy
 
 from core.graph_representation import GraphRepresentationType, GraphRepresentation
-from collections import defaultdict
-from copy import deepcopy
 
 
 class EulerCycleFinder:
@@ -10,6 +8,7 @@ class EulerCycleFinder:
     EulerCycleFinder class contains methods used to find euler cycle
     inside given graph.
     """
+
     def __init__(self):
         self.no_nodes = 0
         self.result = []

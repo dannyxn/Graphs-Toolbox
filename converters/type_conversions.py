@@ -6,7 +6,7 @@ def convert_adj_matrix_to_adj_list(adjacency_matrix: list) -> defaultdict:
         convert_adj_matrix_to_adj_list method converts given adjacency
         matrix to adjacency list
     """
-    adj_list = defaultdict(list)
+    adj_list = defaultdict(list, {degree: [] for degree in range(len(adjacency_matrix))})
     for i in range(len(adjacency_matrix)):
         for j in range(len(adjacency_matrix[i])):
             if adjacency_matrix[i][j]:
