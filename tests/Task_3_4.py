@@ -14,7 +14,8 @@ if __name__ == "__main__":
 
     distance_matrix = dijkstra.create_distance_matrix()
     for i in range(len(distance_matrix)):
-        print(distance_matrix[i])
-    print(f"center node: {center_node(distance_matrix)}")
+        print(f"{i}: ", distance_matrix[i], "\tsum:", sum(distance_matrix[i]), "\tmax", max(distance_matrix[i]))
+
+    print(f"\ncenter node: {center_node(distance_matrix)}")
     print(f"center minimax node: {center_node_minimax(distance_matrix)}")
     display_weighted_nx_graph(G)
