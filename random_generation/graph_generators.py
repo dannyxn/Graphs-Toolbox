@@ -7,6 +7,7 @@ import networkx as nx
 from algorithms.Kosaraju_algorithm import component_list
 from algorithms.checkers import check_if_seq_is_graphic
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
+from converters.type_conversions import convert_adj_matrix_to_adj_list, convert_graph_seq_to_adj_matrix
 
 """
 This file contains methods to generate various types of graphs.
@@ -181,25 +182,8 @@ def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     :return: Generated graph
     :rtype: Adjacency List GraphRepresentation
     """
-    reset = True
-    graph = None
-    while reset:
-        graph = defaultdict(list, {node: [] for node in range(number_of_nodes)})
-        for _ in range(int((number_of_nodes * degree) / 2)):
-            node1 = randint(0, number_of_nodes - 1)
-            node2 = randint(0, number_of_nodes - 1)
-            while node1 == node2:
-                node1 = randint(0, number_of_nodes - 1)
-                node2 = randint(0, number_of_nodes - 1)
-            graph[node1].append(node2)
-            graph[node2].append(node1)
-        reset = False
-        for node, neighbours in graph.items():
-            if node in neighbours or len(neighbours) != degree:
-                reset = True
-            for x in neighbours:
-                if neighbours.count(x) != 1:
-                    reset = True
+    graph_sequence = [degree for _ in range(number_of_nodes)]
+    graph = convert_adj_matrix_to_adj_list(convert_graph_seq_to_adj_matrix(graph_sequence))
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
