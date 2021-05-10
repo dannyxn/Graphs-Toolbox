@@ -1,19 +1,17 @@
 from algorithms.coherent_component import CoherentComponentFinder
 from core.graph_representation import GraphRepresentationType, GraphRepresentation
+from random_generation.graph_generators import generate_with_probability
 
 if __name__ == "__main__":
     raw_adjacency_matrix = [[0, 1, 0, 0, 1, 0], [1, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 0],
                             [0, 0, 1, 0, 1, 1], [1, 1, 0, 1, 0, 0], [0, 0, 0, 1, 0, 0]]
-    graph = GraphRepresentation(GraphRepresentationType.ADJACENCY_MATRIX, raw_adjacency_matrix)
+    #graph = GraphRepresentation(GraphRepresentationType.ADJACENCY_MATRIX, raw_adjacency_matrix)
+    graph = generate_with_probability(7, 0.3)
+    graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
     finder = CoherentComponentFinder()
-    components = finder.find(graph)
-    most_common_component = max(components, key=components.count)
-    new_components = []
-    for i in range(len(components)):
-        if components[i] == most_common_component:
-            new_components.append(i + 1)
+    ret = finder.most_common_component(graph)
     print("Najwieksza składowa:")
-    print(new_components)
+    print(ret)
 
     graph.convert(GraphRepresentationType.ADJACENCY_LIST)
     graph.display()

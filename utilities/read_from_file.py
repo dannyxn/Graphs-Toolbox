@@ -7,7 +7,7 @@ def adjacency_matrix_from_file(file_name: str) -> list:
         operated file format is:
         each lines contains one row with values separated by empty spaces
 
-        examle:
+        example:
 
         0 1 0
         1 0 1

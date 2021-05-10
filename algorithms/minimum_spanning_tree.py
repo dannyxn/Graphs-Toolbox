@@ -2,16 +2,16 @@ import sys
 import numpy as np
 import networkx as nx
 
-"""
-    find_minimum_spanning_tree methods used to fing mimimum spanning tree
-    for given graph
-    :param gr: nx.Graph type where we are looking for minimum spanning tree
 
-    :return: minimum spanning tree as a grap
-    :rtype: nx.Graph
-"""
 def find_minimum_spanning_tree(graph: nx.Graph) -> nx.Graph:
-    # finding minimum spanning tree with Prim's algorithm performed for adjacency matrix
+    """
+        find_minimum_spanning_tree methods used to fing mimimum spanning tree
+        for given graph
+        :param gr: nx.Graph type where we are looking for minimum spanning tree
+
+        :return: minimum spanning tree as a grap
+        :rtype: nx.Graph
+    """
     adj_matrix = nx.to_numpy_array(graph)
     no_nodes = adj_matrix.shape[0]
     selected = np.zeros(no_nodes)

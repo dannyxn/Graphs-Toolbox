@@ -72,21 +72,15 @@ def generate_random_euler_graph(nodes: int) -> GraphRepresentation:
     """
     if nodes <= 2:
         raise ValueError("Invalid number of nodes provided")
-    even_numbers_up_to_nodes = [number * 2 for number in range(1, nodes - 1)]
-    graph = GraphRepresentation(GraphRepresentationType.GRAPHIC_SEQUENCE, [])
-    is_graph_connected = False
+    even_numbers_up_to_nodes = [i for i in range(2, nodes, 2)]
     graphic_seq = []
-    finder = CoherentComponentFinder()
 
-    while not (is_graph_connected and check_if_seq_is_graphic(graphic_seq)):
+    while not (check_if_seq_is_graphic(graphic_seq)):
         graphic_seq = []
         for _ in range(nodes):
             graphic_seq.append(choice(even_numbers_up_to_nodes))
-        graph = GraphRepresentation(GraphRepresentationType.GRAPHIC_SEQUENCE, graphic_seq.copy())
 
-        graph.convert(GraphRepresentationType.ADJACENCY_MATRIX)
-        is_graph_connected = finder.check_if_graph_is_connected(graph)
-
+    graph = GraphRepresentation(GraphRepresentationType.GRAPHIC_SEQUENCE, graphic_seq.copy())
     graph.convert(GraphRepresentationType.ADJACENCY_LIST)
     return graph
 

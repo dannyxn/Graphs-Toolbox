@@ -33,5 +33,15 @@ class CoherentComponentFinder:
                     self.components[other_node] = component_index
                     self._find_recursively(graph, component_index, other_node)
 
+    #TODO
     def check_if_graph_is_connected(self, graph: GraphRepresentation) -> bool:
         return all(v == 1 for v in self.find(graph))
+
+    def most_common_component(self, graph: GraphRepresentation) -> list:
+        components = self.find(graph)
+        most_common_component = max(components, key=components.count)
+        new_components = []
+        for i in range(len(components)):
+            if components[i] == most_common_component:
+                new_components.append(i + 1)
+        return new_components
