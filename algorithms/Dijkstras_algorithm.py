@@ -38,7 +38,6 @@ class DijkstraAlgorithm:
                 if self.branch_matrix[u][v]:
                     self.relaxation(u, v)
 
-
     def all_shortest_paths(self, source_node: int):
         """
             all_shortest_paths method prints all
@@ -62,7 +61,6 @@ class DijkstraAlgorithm:
             path_string += "{}".format(path_nodes_tab[len(path_nodes_tab) - 1])
             path_string += "]"
             print(path_string)
-
 
     def create_distance_matrix(self):
         """
