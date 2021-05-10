@@ -10,8 +10,7 @@ def display_weighted_nx_graph(graph: nx.Graph, filename: str = ""):
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
     if filename:
         plt.savefig(filename)
-    else:
-        plt.show()
+    plt.show()
 
 
 def display_nx_graph(graph: nx.Graph, filename: str = ""):
@@ -19,8 +18,7 @@ def display_nx_graph(graph: nx.Graph, filename: str = ""):
     plt.draw()
     if filename:
         plt.savefig(filename)
-    else:
-        plt.show()
+    plt.show()
 
 
 def display_nx_digraph(graph: nx.DiGraph, filename: str = ""):
@@ -29,8 +27,8 @@ def display_nx_digraph(graph: nx.DiGraph, filename: str = ""):
     plt.draw()
     if filename:
         plt.savefig(filename)
-    else:
-        plt.show()
+
+    plt.show()
 
 
 def display_weighted_nx_di_graph(graph, filename: str = ""):
@@ -41,8 +39,7 @@ def display_weighted_nx_di_graph(graph, filename: str = ""):
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels, label_pos=0.15)
     if filename:
         plt.savefig(filename)
-    else:
-        plt.show()
+    plt.show()
 
 
 def display_flow_network(graph: nx.DiGraph, filename: str = ""):
@@ -53,5 +50,4 @@ def display_flow_network(graph: nx.DiGraph, filename: str = ""):
     plt.axis("equal")
     if filename:
         plt.savefig(filename)
-    else:
-        plt.show()
+    plt.show()
