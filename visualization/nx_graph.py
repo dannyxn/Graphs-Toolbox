@@ -45,8 +45,11 @@ def display_weighted_nx_di_graph(graph, filename: str = ""):
 def display_flow_network(graph: nx.DiGraph, filename: str = ""):
     pos = nx.multipartite_layout(graph, subset_key="layer")
     colors = nx.get_edge_attributes(graph, 'color').values()
+    labels = nx.get_edge_attributes(graph, 'weight')
+
     plt.figure(figsize=(8, 8))
     nx.draw(graph, pos, edge_color=colors, with_labels=True)
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels, label_pos=0.5)
     plt.axis("equal")
     if filename:
         plt.savefig(filename)
