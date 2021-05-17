@@ -238,6 +238,8 @@ class FLowNetworkGenerator:
             edges += 1
             all_edges += 1
 
+        for (u, v, w) in G.edges(data=True):
+            w['weight'] = randint(1, 10)
         return G
 
     @staticmethod
