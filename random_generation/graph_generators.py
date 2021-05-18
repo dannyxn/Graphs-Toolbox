@@ -181,13 +181,17 @@ def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
     return GraphRepresentation(GraphRepresentationType.ADJACENCY_LIST, graph)
 
 
-class FLowNetworkGenerator:
+class FlowNetworkGenerator:
     """
-    Class FLowNetworkGenerator contains methods used to generate
+    Class FlowNetworkGenerator contains methods used to generate
     random flow network between single source and single sink.
     """
 
     def generate_flow_network(self, N: int) -> nx.DiGraph:
+        """
+        :param int N: number of layers
+        :return: flow network as digraph
+        """
         layers_edges = [1] + [randint(2, N) for _ in range(N)] + [1]
         G = nx.DiGraph()
         counter = 0
