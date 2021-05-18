@@ -196,12 +196,14 @@ class FLowNetworkGenerator:
         for i in range(len(layers_edges)):
             layers.append([])
 
+        # Count maximum edges for generated digraph
         max_edges = 0
         for i in range(1, len(layers_edges) - 2):
             max_edges += self.return_n(layers_edges[i] + layers_edges[i + 1])
             if 1 < i < len(layers_edges) - 2:
                 max_edges -= self.return_n(layers_edges[i])
 
+        # For every layers append vertices
         for i in layers_edges:
             for j in range(i):
                 layers[layer_c].append(counter)
@@ -209,6 +211,7 @@ class FLowNetworkGenerator:
                 counter += 1
             layer_c += 1
 
+        # Generate random edges
         for i in range(1, len(layers) - 1):
             for node in layers[i]:
                 G.add_edge(choice(layers[i - 1]), node, color='black')

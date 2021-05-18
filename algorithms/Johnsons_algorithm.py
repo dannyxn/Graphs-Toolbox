@@ -10,7 +10,7 @@ class JohnsonAlgorithm:
         self.adj_matrix = adj_matrix
         self.branch_matrix = branch_matrix
 
-    def add_s(self):
+    def add_s(self) -> tuple[list, list]:
         new_adj_matrix = self.adj_matrix.copy()
         new_branch_matrix = self.branch_matrix.copy()
         new_adj_matrix.append([0.0 for j in range(self.number_of_nodes + 1)])
@@ -23,14 +23,14 @@ class JohnsonAlgorithm:
 
         return new_adj_matrix, new_branch_matrix
 
-    def johnson(self):
+    def johnson(self) -> list:
         new_adj_matrix, new_branch_matrix = self.add_s()
         new_G = [j for j in range(self.number_of_nodes + 1)]
         G = [j for j in range(self.number_of_nodes)]
         bellman = BellmanFordAlgorithm(new_adj_matrix, new_branch_matrix)
         if not bellman.find_shortest_path(self.number_of_nodes):
             print("ERROR negative cycle")
-
+            return []
         else:
             new_g_distances_tab = bellman.get_distances_list()
             for u in new_G:

@@ -1,8 +1,7 @@
-from collections import defaultdict
-
 import networkx as nx
 
-def kosaraju(G: nx.DiGraph):
+
+def kosaraju(G: nx.DiGraph) -> list:
     g = nx.to_dict_of_lists(G)
 
     d = [-1 for _ in g]
@@ -26,7 +25,8 @@ def kosaraju(G: nx.DiGraph):
 
     return comp
 
-def DFS_visit(v, g, d, f, t):
+
+def DFS_visit(v: int, g: dict, d: list, f: list, t: int) -> int:
     t = t + 1
     d[v] = t
 
@@ -39,13 +39,14 @@ def DFS_visit(v, g, d, f, t):
     return t
 
 
-def Components_R(nr, v, g, comp):
+def Components_R(nr: int, v: int, g: dict, comp: list):
     for u in g[v]:
         if comp[u] == -1:
             comp[u] = nr
             Components_R(nr, u, g, comp)
 
-def component_list(G):
+
+def component_list(G) -> dict:
     comp = kosaraju(G)
     adjency_list = {}
     check = False
