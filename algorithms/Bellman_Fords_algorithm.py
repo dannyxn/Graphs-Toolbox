@@ -60,6 +60,8 @@ class BellmanFordAlgorithm:
                 path_string += "{}".format(path_nodes_tab[len(path_nodes_tab) - 1])
                 path_string += "]"
                 print(path_string)
+        else:
+            print("ERROR negative cycle")
 
     def get_distances_list(self) -> list:
         return self.distance_tab.copy()
