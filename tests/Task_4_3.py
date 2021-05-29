@@ -1,6 +1,6 @@
 import networkx as nx
 
-from algorithms.Bellman_Fords_algorithm import BellmanFordAlgorithm
+from algorithms.bellman_Fords_algorithm import BellmanFordAlgorithm
 from random_generation.graph_generators import generate_strongly_connected_di_graph_with_weights
 from visualization.nx_graph import display_weighted_nx_di_graph
 

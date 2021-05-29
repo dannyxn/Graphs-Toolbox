@@ -4,7 +4,7 @@ from typing import Tuple, List
 
 import networkx as nx
 
-from algorithms.Kosaraju_algorithm import component_list
+from algorithms.kosaraju_algorithm import component_list
 from algorithms.checkers import check_if_seq_is_graphic
 from algorithms.coherent_component import GraphRepresentationType, GraphRepresentation, CoherentComponentFinder
 from converters.type_conversions import convert_adj_matrix_to_adj_list, convert_graph_seq_to_adj_matrix
@@ -132,7 +132,7 @@ def generate_digraph_with_probability(number_of_nodes: int, probability: float) 
 
 
 def generate_strongly_connected_di_graph_with_weights(num_of_nodes: int, probability: float, down_value: int = -5,
-                                                      up_value: int = 10) -> Tuple[nx.DiGraph, List[list]]:
+                                                      up_value: int = 10) -> tuple:
     """
     generate_strongly_connected_di_graph_with_weights method generate digraph
     with weights based on the number of nodes, probability and weight range

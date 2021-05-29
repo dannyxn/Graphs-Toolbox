@@ -1,4 +1,4 @@
-from algorithms.Dijkstras_algorithm import DijkstraAlgorithm, generate_branch_matrix
+from algorithms.dijkstras_algorithm import DijkstraAlgorithm, generate_branch_matrix
 from random_generation.graph_generators import generate_connected_graph
 from visualization.nx_graph import display_weighted_nx_graph
 

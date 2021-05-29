@@ -1,5 +1,5 @@
-from algorithms.Bellman_Fords_algorithm import BellmanFordAlgorithm
-from algorithms.Dijkstras_algorithm import DijkstraAlgorithm
+from algorithms.bellman_Fords_algorithm import BellmanFordAlgorithm
+from algorithms.dijkstras_algorithm import DijkstraAlgorithm
 
 
 class JohnsonAlgorithm:
@@ -10,7 +10,7 @@ class JohnsonAlgorithm:
         self.adj_matrix = adj_matrix
         self.branch_matrix = branch_matrix
 
-    def add_s(self) -> tuple[list, list]:
+    def add_s(self) -> tuple:
         new_adj_matrix = self.adj_matrix.copy()
         new_branch_matrix = self.branch_matrix.copy()
         new_adj_matrix.append([0.0 for j in range(self.number_of_nodes + 1)])

@@ -1,6 +1,6 @@
 import networkx as nx
 
-from algorithms.Johnsons_algorithm import JohnsonAlgorithm
+from algorithms.johnsons_algorithm import JohnsonAlgorithm
 from random_generation.graph_generators import generate_strongly_connected_di_graph_with_weights
 from visualization.nx_graph import display_weighted_nx_di_graph
 

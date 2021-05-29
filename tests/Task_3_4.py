@@ -1,4 +1,4 @@
-from algorithms.Dijkstras_algorithm import DijkstraAlgorithm, generate_branch_matrix
+from algorithms.dijkstras_algorithm import DijkstraAlgorithm, generate_branch_matrix
 from random_generation.graph_generators import generate_connected_graph
 from algorithms.center_node import center_node, center_node_minimax
 from visualization.nx_graph import display_weighted_nx_graph

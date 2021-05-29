@@ -17,6 +17,7 @@ def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) ->
     number_of_nodes = len(adjacency_matrix)
 
     for step in range(number_of_randomization):
+        n = 10000 * number_of_nodes
         while True:
             while True:
                 node_a = randint(0, number_of_nodes - 1)
@@ -24,6 +25,9 @@ def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) ->
                 if ((adjacency_matrix[node_a][node_b] == adjacency_matrix[node_b][node_a]) and (
                         adjacency_matrix[node_b][node_a] == 1)) and node_a != node_b:
                     break
+                n -= 1
+                if n <= 0:
+                    raise Exception("Graph can not be randomized")
 
             while True:
                 node_c = randint(0, number_of_nodes - 1)
@@ -31,6 +35,9 @@ def randomize_graph(graph: GraphRepresentation, number_of_randomization: int) ->
                 if ((adjacency_matrix[node_c][node_d] == adjacency_matrix[node_d][node_c]) and (
                         adjacency_matrix[node_c][node_d] == 1)) and node_c != node_d:
                     break
+                n -= 1
+                if n <= 0:
+                    raise Exception("Graph can not be randomized")
 
             if (adjacency_matrix[node_a][node_d] == 0) and (
                     adjacency_matrix[node_b][node_c] == 0) and node_a != node_d and node_b != node_c \
