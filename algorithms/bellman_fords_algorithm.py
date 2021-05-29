@@ -7,22 +7,22 @@ class BellmanFordAlgorithm:
     the shortest path using Bellman Ford algorithm.
     """
 
-    def __init__(self, adj_matrix: list, branch_matrix: list):
-        self.number_of_nodes = len(adj_matrix)
-        self.distance_tab = [0 for _ in range(len(adj_matrix))]
-        self.previous_node_tab = [0 for _ in range(len(adj_matrix))]
+    def __init__(self, adj_matrix_with_distances: list, adj_matrix: list):
+        self.number_of_nodes = len(adj_matrix_with_distances)
+        self.distance_tab = [0 for _ in range(len(adj_matrix_with_distances))]
+        self.previous_node_tab = [0 for _ in range(len(adj_matrix_with_distances))]
+        self.adj_matrix_with_distances = adj_matrix_with_distances
         self.adj_matrix = adj_matrix
-        self.branch_matrix = branch_matrix
 
     def distances_init(self, source_node: int):
-        for i in range(len(self.adj_matrix)):
+        for i in range(len(self.adj_matrix_with_distances)):
             self.distance_tab[i] = sys.maxsize
             self.previous_node_tab[i] = None
         self.distance_tab[source_node] = 0
 
     def relaxation(self, u: int, v: int):
-        if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix[u][v]):
-            self.distance_tab[v] = self.distance_tab[u] + self.adj_matrix[u][v]
+        if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix_with_distances[u][v]):
+            self.distance_tab[v] = self.distance_tab[u] + self.adj_matrix_with_distances[u][v]
             self.previous_node_tab[v] = u
 
     def find_shortest_path(self, source_node: int) -> bool:
@@ -32,12 +32,12 @@ class BellmanFordAlgorithm:
         for i in range(self.number_of_nodes - 1):
             for u in G:
                 for v in G:
-                    if self.branch_matrix[u][v]:
+                    if self.adj_matrix[u][v]:
                         self.relaxation(u, v)
         for u in G:
             for v in G:
-                if self.branch_matrix[u][v]:
-                    if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix[u][v]):
+                if self.adj_matrix[u][v]:
+                    if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix_with_distances[u][v]):
                         return False
         return True
 

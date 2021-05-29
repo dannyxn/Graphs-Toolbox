@@ -2,27 +2,27 @@ import sys
 
 
 class DijkstraAlgorithm:
-    def __init__(self, adj_matrix: list, branch_matrix: list):
-        self.distance_tab = [0 for j in range(len(adj_matrix))]
-        self.previous_node_tab = [0 for j in range(len(adj_matrix))]
-        self.adj_matrix = adj_matrix
-        self.branch_matrix = branch_matrix
+    def __init__(self, adj_matrix_with_distances: list, adjacency_matrix: list):
+        self.distance_tab = [0 for j in range(len(adj_matrix_with_distances))]
+        self.previous_node_tab = [0 for j in range(len(adj_matrix_with_distances))]
+        self.adj_matrix_with_distances = adj_matrix_with_distances
+        self.adjacency_matrix = adjacency_matrix
 
-    def distances_init(self, source_node: int):
-        for i in range(len(self.adj_matrix)):
+    def distances_init(self, source_node: int) -> None:
+        for i in range(len(self.adj_matrix_with_distances)):
             self.distance_tab[i] = sys.maxsize
             self.previous_node_tab[i] = None
         self.distance_tab[source_node] = 0
 
-    def relaxation(self, u: int, v: int):
-        if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix[u][v]):
-            self.distance_tab[v] = self.distance_tab[u] + self.adj_matrix[u][v]
+    def relaxation(self, u: int, v: int) -> None:
+        if self.distance_tab[v] > (self.distance_tab[u] + self.adj_matrix_with_distances[u][v]):
+            self.distance_tab[v] = self.distance_tab[u] + self.adj_matrix_with_distances[u][v]
             self.previous_node_tab[v] = u
 
-    def find_shortest_path(self, source_node: int):
+    def find_shortest_path(self, source_node: int) -> None:
         self.distances_init(source_node)
         S = []
-        G = [j for j in range(len(self.adj_matrix))]
+        G = [j for j in range(len(self.adj_matrix_with_distances))]
         while G:
             min = self.distance_tab[G[0]]
             index_of_min = G[0]
@@ -35,10 +35,10 @@ class DijkstraAlgorithm:
             G.remove(u)
 
             for v in G:
-                if self.branch_matrix[u][v]:
+                if self.adjacency_matrix[u][v]:
                     self.relaxation(u, v)
 
-    def all_shortest_paths(self, source_node: int):
+    def all_shortest_paths(self, source_node: int) -> None:
         """
             all_shortest_paths method prints all
             shortest paths from given node to others
@@ -62,13 +62,13 @@ class DijkstraAlgorithm:
             path_string += "]"
             print(path_string)
 
-    def create_distance_matrix(self):
+    def create_distance_matrix(self) -> list:
         """
             create_distance_matrix method calculates and returns
             distance_matrix between each node in graph
         """
         distance_matrix = []
-        for i in range(len(self.adj_matrix)):
+        for i in range(len(self.adj_matrix_with_distances)):
             self.find_shortest_path(i)
             distance_matrix.append(self.distance_tab.copy())
 
@@ -78,18 +78,18 @@ class DijkstraAlgorithm:
         return self.distance_tab.copy()
 
 
-def generate_branch_matrix(adj_matrix):
+def generate_adjacency_matrix(adj_matrix_with_distances) -> list:
     """
         method generates matrix of bools representing
         whether there is a branch between two nodes
     """
-    G = [j for j in range(len(adj_matrix))]
-    branch_matrix = [[] for _ in G]
+    G = [j for j in range(len(adj_matrix_with_distances))]
+    adj_matrix = [[] for _ in G]
+    for i in range(len(adj_matrix_with_distances)):
+        adj_matrix[i] = [False for _ in G]
     for i in range(len(adj_matrix)):
-        branch_matrix[i] = [False for _ in G]
-    for i in range(len(branch_matrix)):
-        for j in range(len(branch_matrix)):
-            if adj_matrix[i][j] != 0:
-                branch_matrix[i][j] = True
+        for j in range(len(adj_matrix)):
+            if adj_matrix_with_distances[i][j] != 0:
+                adj_matrix[i][j] = True
 
-    return branch_matrix
+    return adj_matrix

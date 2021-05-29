@@ -151,18 +151,18 @@ def generate_strongly_connected_di_graph_with_weights(num_of_nodes: int, probabi
         component = component_list(G)
         if len(component) == 1:
             break
-    adj_matrix = nx.to_numpy_array(G)
-    branch_matrix = [[] for _ in G]
+    adj_matrix_with_distances = nx.to_numpy_array(G)
+    adj_matrix = [[] for _ in G]
+    for i in range(len(adj_matrix_with_distances)):
+        adj_matrix[i] = [False for _ in G]
     for i in range(len(adj_matrix)):
-        branch_matrix[i] = [False for _ in G]
-    for i in range(len(branch_matrix)):
-        for j in range(len(branch_matrix)):
-            if adj_matrix[i][j] != 0:
-                branch_matrix[i][j] = True
+        for j in range(len(adj_matrix)):
+            if adj_matrix_with_distances[i][j] != 0:
+                adj_matrix[i][j] = True
 
     for (u, v, w) in G.edges(data=True):
         w['weight'] = randint(down_value, up_value)
-    return G, branch_matrix
+    return G, adj_matrix
 
 
 def k_regular_graph(number_of_nodes: int, degree: int) -> GraphRepresentation:
